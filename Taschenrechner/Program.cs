@@ -14,10 +14,20 @@ namespace Taschenrechner
             double ersterSummandZahl = Convert.ToDouble(ersterSummand);
             double zweiterSummandZahl = Convert.ToDouble(zweiterSummand);
 
-            double summe = ersterSummandZahl + zweiterSummandZahl;
+            double summe = Addiere(ersterSummandZahl, zweiterSummandZahl);
 
             Console.WriteLine("Die Summe ist {0}", summe);
+            WarteAufBenutzerEingabe();
+        }
 
+        static double Addiere(double ersterSummand, double zweiterSummand)
+        {
+            double summe = ersterSummand + zweiterSummand;
+            return summe;
+        }
+        static void WarteAufBenutzerEingabe()
+        {
+            Console.WriteLine("Zum Beenden bitte Enter Taste drücken");
             Console.ReadLine();
         }
     }
