@@ -17,8 +17,12 @@ namespace Taschenrechner
             double ersteZahl = Convert.ToDouble(ersteZahlalsString);
             double zweiteZahl = Convert.ToDouble(zweiteZahlalsTring);
 
-            double resultat = Berechne(ersteZahl, zweiteZahl, operation);
-            GibResultatAus(resultat);
+            //Berechnung ausführen
+            RechnerModel model = new RechnerModel();
+            model.Berechne(ersteZahl, zweiteZahl, operation);
+
+            //Ausgabe
+            GibResultatAus(model.Resultat, operation);
 
             HoleBenutzereingabe("Zum Beenden bitte Enter Taste drücken");
         }
@@ -30,69 +34,11 @@ namespace Taschenrechner
             return summand;
         }
 
-        static double Berechne(double ersteZahl, double zweiteZahl, string operation)
+
+        static void GibResultatAus(double resultat, string operation)
         {
-            double resultat = 0;
-            switch (operation)
-            {
-                case "+":
-                    resultat = Addiere(ersteZahl, zweiteZahl);
-                    break;
-
-                case "-":
-                    resultat = Subtrahiere(ersteZahl, zweiteZahl);
-                    break;
-
-                case "/":
-                    resultat = Dividiere(ersteZahl, zweiteZahl);
-                    break;
-
-
-                case "*":
-                    resultat = Multipliziere(ersteZahl, zweiteZahl);
-                    break;
-
-
-                default:
-                    Console.WriteLine("Du hast eine ungültige Auswahl für die Operation getroffen");
-                    break;
-            }
-
-            return resultat;
-
+            Console.WriteLine("Das Resultat der Operation {0} hat den Wert {1}", operation, resultat);
         }
-
-        static double Addiere(double ersterSummand, double zweiterSummand)
-        {
-            double summe = ersterSummand + zweiterSummand;
-            return summe;
-        }
-
-
-        static double Subtrahiere(double minunend, double subtrahent)
-        {
-            double differenz = minunend - subtrahent;
-            return differenz;
-        }
-
-        static double Multipliziere(double multiplikator, double multiplikant)
-        {
-            double produkt = multiplikator * multiplikant;
-            return produkt;
-        }
-
-        static double Dividiere(double dividend, double divisor)
-        {
-
-            double quotient = dividend / divisor;
-            return quotient;
-        }
-
-        static void GibResultatAus(double resultat)
-        {
-            Console.WriteLine("Das Resultat hat den Wert {0}", resultat);
-        }
-
 
     }
 
