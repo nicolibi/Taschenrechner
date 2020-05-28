@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Taschenrechner
+﻿namespace Taschenrechner
 {
     class AnwendungsController
     {
@@ -16,16 +14,10 @@ namespace Taschenrechner
 
         public void Ausfuehren()
         {
-            //User Storys für Berechnungsoperationen, Abfrage der Oparatoren und Operation
-            string ersteZahlalsString = view.HoleZahlVomBenutzer();
+
+            double ersteZahl = view.HoleZahlVomBenutzer();
             string operation = view.HoleOperationVomBenutzer();
-            string zweiteZahlalsTring = view.HoleZahlVomBenutzer();
-
-
-            //Konvertieren in Gleitkommazahl
-            //TODO: Auslagern in Funktion wenn der Code umfangreicher wird
-            double ersteZahl = Convert.ToDouble(ersteZahlalsString);
-            double zweiteZahl = Convert.ToDouble(zweiteZahlalsTring);
+            double zweiteZahl = view.HoleZahlVomBenutzer();
 
             //Berechnung ausführen
 
