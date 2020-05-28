@@ -6,8 +6,8 @@ namespace Taschenrechner
     {
         public static void Main()
         {
-            //Anlegen des ConsoleView Objekts
-            ConsoleView console = new ConsoleView();
+            RechnerModel model = new RechnerModel();
+            ConsoleView console = new ConsoleView(model);
 
             //User Storys für Berechnungsoperationen, Abfrage der Oparatoren und Operation
             string ersteZahlalsString = console.HoleBenutzereingabe("Bitte gib die erste Zahl ein: ");
@@ -21,12 +21,12 @@ namespace Taschenrechner
             double zweiteZahl = Convert.ToDouble(zweiteZahlalsTring);
 
             //Berechnung ausführen
-            RechnerModel model = new RechnerModel();
+
             model.Berechne(ersteZahl, zweiteZahl, operation);
 
             //Ausgabe
 
-            console.GibResultatAus(model.Resultat, operation);
+            console.GibResultatAus(operation);
             console.HoleBenutzereingabe("Zum Beenden bitte Enter Taste drücken");
         }
 
