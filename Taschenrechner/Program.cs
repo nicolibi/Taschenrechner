@@ -6,11 +6,14 @@ namespace Taschenrechner
     {
         public static void Main()
         {
-            //User Storys für Berechnungsoperationen, Abfrage der Oparatoren und Operation
-            string ersteZahlalsString = HoleBenutzereingabe("Bitte gib die erste Zahl ein: ");
-            string zweiteZahlalsTring = HoleBenutzereingabe("Bitte gib  die zweite Zahl ein: ");
+            //Anlegen des ConsoleView Objekts
+            ConsoleView console = new ConsoleView();
 
-            string operation = HoleBenutzereingabe("Welche Operation möchtest du ausführen (+ ,-, /, *)? ");
+            //User Storys für Berechnungsoperationen, Abfrage der Oparatoren und Operation
+            string ersteZahlalsString = console.HoleBenutzereingabe("Bitte gib die erste Zahl ein: ");
+            string zweiteZahlalsTring = console.HoleBenutzereingabe("Bitte gib  die zweite Zahl ein: ");
+
+            string operation = console.HoleBenutzereingabe("Welche Operation möchtest du ausführen (+ ,-, /, *)? ");
 
             //Konvertieren in Gleitkommazahl
             //TODO: Auslagern in Funktion wenn der Code umfangreicher wird
@@ -22,11 +25,12 @@ namespace Taschenrechner
             model.Berechne(ersteZahl, zweiteZahl, operation);
 
             //Ausgabe
-            GibResultatAus(model.Resultat, operation);
 
-            HoleBenutzereingabe("Zum Beenden bitte Enter Taste drücken");
+            console.GibResultatAus(model.Resultat, operation);
+            console.HoleBenutzereingabe("Zum Beenden bitte Enter Taste drücken");
         }
 
+        /*
         static string HoleBenutzereingabe(string ausgabetext)
         {
             Console.Write(ausgabetext);
@@ -38,7 +42,7 @@ namespace Taschenrechner
         static void GibResultatAus(double resultat, string operation)
         {
             Console.WriteLine("Das Resultat der Operation {0} hat den Wert {1}", operation, resultat);
-        }
+        }*/
 
     }
 
