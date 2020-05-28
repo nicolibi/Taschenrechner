@@ -25,7 +25,7 @@
 
             //Ausgabe
 
-            view.GibResultatAus(operation);
+            view.GibResultatAus();
             view.WarteAufEndeDurchBenutzer();
         }
 
