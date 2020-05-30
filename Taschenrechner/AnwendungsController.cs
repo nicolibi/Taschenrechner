@@ -15,13 +15,12 @@
         public void Ausfuehren()
         {
 
-            double ersteZahl = view.HoleZahlVomBenutzer();
-            string operation = view.HoleOperationVomBenutzer();
-            double zweiteZahl = view.HoleZahlVomBenutzer();
+
+            view.HoleEingabeVomBenutzer();
 
             //Berechnung ausführen
 
-            model.Berechne(ersteZahl, zweiteZahl, operation);
+            model.Berechne();
 
             //Ausgabe
 
