@@ -15,16 +15,19 @@
         public void Ausfuehren()
         {
 
+            while (!view.BenutzerWillBeenden)
+            {
+                view.HoleEingabeVomBenutzer();
 
-            view.HoleEingabeVomBenutzer();
+                //Berechnung ausführen
 
-            //Berechnung ausführen
+                model.Berechne();
 
-            model.Berechne();
+                //Ausgabe
 
-            //Ausgabe
+                view.GibResultatAus();
+            }
 
-            view.GibResultatAus();
             view.WarteAufEndeDurchBenutzer();
         }
 

@@ -6,7 +6,7 @@ namespace Taschenrechner
     {
 
         private RechnerModel model;
-
+        public bool BenutzerWillBeenden = false;
         public ConsoleView(RechnerModel model)
         {
             this.model = model;
@@ -21,11 +21,17 @@ namespace Taschenrechner
 
         private double HoleZahlVomBenutzer()
         {
-            string zahl;
-            Console.Write("Bitte gib eine Zahl für die Berechnung ein: ");
-            zahl = Console.ReadLine();
+            string eingabe;
+            Console.Write("Bitte gib eine Zahl für die Berechnung ein (FERTIG zum Beenden): ");
+            eingabe = Console.ReadLine();
 
-            return Convert.ToDouble(zahl);
+            if (eingabe == "FERTIG")
+            {
+                BenutzerWillBeenden = true;
+                eingabe = "0,0";
+            }
+
+            return Convert.ToDouble(eingabe);
         }
 
 
