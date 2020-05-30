@@ -25,7 +25,7 @@ namespace Taschenrechner
             string eingabe = HoleNaechsteAktionVomBenutzer();
 
 
-            if (eingabe == "Fertig")
+            if (eingabe.ToUpper() == "FERTIG")
             {
                 BenutzerWillBeenden = true;
             }
@@ -45,11 +45,27 @@ namespace Taschenrechner
 
         private double HoleZahlVomBenutzer()
         {
-            string zahl;
-            Console.Write("Bitte gib eine Zahl für die Berechnung ein (FERTIG zum Beenden): ");
-            zahl = Console.ReadLine();
+            string eingabe;
+            double zahl;
+            Console.Write("Bitte gib eine Zahl für die Berechnung ein: ");
+            eingabe = Console.ReadLine();
 
-            return Convert.ToDouble(zahl);
+
+
+            while (!double.TryParse(eingabe, out zahl) && eingabe.ToUpper() != "FERTIG")
+            {
+                Console.WriteLine("Du musst eine gültige Gleitkommazahl eingeben!");
+                Console.WriteLine("Neben den Ziffern 0-9 sind lediglich die folgenden Sonderzeichen erlaubt: ,.-");
+                Console.WriteLine("Dabei muss das - als erstes Zeichen vor einer Ziffer gesetzt werden.");
+                Console.WriteLine("Der . fungiert als Trennzeichen an Tausenderstellen.");
+                Console.WriteLine("Das , ist das Trennzeichen für die Nachkommastellen.");
+                Console.WriteLine("Alle drei Sonderzeichen sind optional!");
+                Console.WriteLine();
+                Console.Write("Bitte gib erneut eine Zahl für die Berechnung ein: ");
+                eingabe = Console.ReadLine();
+            }
+
+            return zahl;
         }
 
 
