@@ -21,7 +21,9 @@ namespace Taschenrechner
 
         public void HoleEingabenFuerFortlaufendeBerechnung()
         {
+            model.Operation = HoleOperatorVomBenutzer();
             string eingabe = HoleNaechsteAktionVomBenutzer();
+
 
             if (eingabe == "Fertig")
             {
@@ -57,11 +59,7 @@ namespace Taschenrechner
             return Console.ReadLine();
         }
 
-        public void WarteAufEndeDurchBenutzer()
-        {
-            Console.WriteLine("Bitte drücke die ReturnTaste zum Beenden");
-            Console.ReadLine();
-        }
+
 
         public void GibResultatAus()
         {

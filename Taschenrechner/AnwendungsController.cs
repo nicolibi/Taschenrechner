@@ -17,7 +17,6 @@
             view.HoleEingabenFuerErsteBerechnungVomBenutzer();
             model.Berechne();
             view.GibResultatAus();
-            view.WarteAufEndeDurchBenutzer();
             view.HoleEingabenFuerFortlaufendeBerechnung();
 
             while (!view.BenutzerWillBeenden)
