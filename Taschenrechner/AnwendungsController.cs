@@ -14,21 +14,20 @@
 
         public void Ausfuehren()
         {
+            view.HoleEingabenFuerErsteBerechnungVomBenutzer();
+            model.Berechne();
+            view.GibResultatAus();
+            view.WarteAufEndeDurchBenutzer();
+            view.HoleEingabenFuerFortlaufendeBerechnung();
 
             while (!view.BenutzerWillBeenden)
             {
-                view.HoleEingabeVomBenutzer();
-
-                //Berechnung ausführen
 
                 model.Berechne();
-
-                //Ausgabe
-
                 view.GibResultatAus();
+                view.HoleEingabenFuerFortlaufendeBerechnung();
             }
 
-            view.WarteAufEndeDurchBenutzer();
         }
 
 

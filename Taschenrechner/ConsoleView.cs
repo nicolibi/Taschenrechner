@@ -12,26 +12,42 @@ namespace Taschenrechner
             this.model = model;
         }
 
-        public void HoleEingabeVomBenutzer()
+        public void HoleEingabenFuerErsteBerechnungVomBenutzer()
         {
             model.ErsteZahl = HoleZahlVomBenutzer();
             model.Operation = HoleOperatorVomBenutzer();
             model.ZweiteZahl = HoleZahlVomBenutzer();
         }
 
-        private double HoleZahlVomBenutzer()
+        public void HoleEingabenFuerFortlaufendeBerechnung()
         {
-            string eingabe;
-            Console.Write("Bitte gib eine Zahl für die Berechnung ein (FERTIG zum Beenden): ");
-            eingabe = Console.ReadLine();
+            string eingabe = HoleNaechsteAktionVomBenutzer();
 
-            if (eingabe == "FERTIG")
+            if (eingabe == "Fertig")
             {
                 BenutzerWillBeenden = true;
-                eingabe = "0,0";
             }
+            else
+            {
+                model.ErsteZahl = model.Resultat;
+                model.ZweiteZahl = Convert.ToDouble(eingabe);
+            }
+        }
 
-            return Convert.ToDouble(eingabe);
+        private string HoleNaechsteAktionVomBenutzer()
+        {
+            Console.Write("Bitte gib eine weitere Zahl ein (Fertig zum Beenden): ");
+            return Console.ReadLine();
+        }
+
+
+        private double HoleZahlVomBenutzer()
+        {
+            string zahl;
+            Console.Write("Bitte gib eine Zahl für die Berechnung ein (FERTIG zum Beenden): ");
+            zahl = Console.ReadLine();
+
+            return Convert.ToDouble(zahl);
         }
 
 
