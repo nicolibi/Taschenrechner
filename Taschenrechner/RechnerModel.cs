@@ -9,6 +9,8 @@ namespace Taschenrechner
         public string Operation { get; set; }
         public double ErsteZahl { get; set; }
         public double ZweiteZahl { get; set; }
+        public bool ZahlGueltig = false;
+
 
         public RechnerModel()
         {
@@ -43,6 +45,27 @@ namespace Taschenrechner
                 default:
                     Console.WriteLine("Du hast eine ungültige Auswahl für die Operation getroffen");
                     break;
+            }
+
+        }
+
+        public void PruefeWertGueltig(double zahl, int abgefragteZahl)
+        {
+            if (zahl >= -10 && zahl <= 100)
+            {
+                if (abgefragteZahl == 1)
+                {
+                    ErsteZahl = zahl;
+                }
+                else
+                {
+                    ZweiteZahl = zahl;
+                }
+                ZahlGueltig = true;
+            }
+            else
+            {
+                ZahlGueltig = false;
             }
 
         }
