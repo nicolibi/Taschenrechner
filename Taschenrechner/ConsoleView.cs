@@ -12,22 +12,33 @@ namespace Taschenrechner
             this.model = model;
         }
 
-        public void HoleEingabenFuerErsteBerechnungVomBenutzer()
+        private void HoleZahlVomBenutzer(int abgefragteZahl)
         {
-            HoleZahlVomBenutzer(1);
-            model.Operation = HoleOperatorVomBenutzer();
-            HoleZahlVomBenutzer(2);
+            string eingabe;
+            eingabe = FrageZahlvonBenutzerAb();
+            PruefeEingegebenenZahlenwert(eingabe, abgefragteZahl);
+        }
+        public void HoleEingabenFuerBerechnungVomBenutzer(bool ersteAbfrage = false)
+        {
+            if (ersteAbfrage)
+            {
+                HoleZahlVomBenutzer(1);
+            }
+            else
+            {
+                model.ErsteZahl = model.Resultat;
+            }
+
+            HoleOperatorVomBenutzer();
+
+            if (!(model.AktuellerStatus == Status.BeendigungDurchBenutzer))
+            {
+
+                HoleZahlVomBenutzer(2);
+            }
+
         }
 
-        public void HoleEingabenFuerFortlaufendeBerechnung()
-        {
-            model.ErsteZahl = model.Resultat;
-            model.Operation = HoleOperatorVomBenutzer();
-
-
-            string eingabe = FrageZahlvonBenutzerAb();
-            PruefeEingabeAufGueltigkeit(eingabe, 2);
-        }
 
         private string FrageZahlvonBenutzerAb()
         {
@@ -35,17 +46,23 @@ namespace Taschenrechner
             return Console.ReadLine();
         }
 
-        private void HoleZahlVomBenutzer(int abgefragteZahl)
+
+        private void HoleOperatorVomBenutzer()
         {
-            string eingabe;
-            eingabe = FrageZahlvonBenutzerAb();
-            PruefeEingabeAufGueltigkeit(eingabe, abgefragteZahl);
+            Console.Write("Bitte gib eine Operation ein (+,-,*,/), # für Abbruch : ");
+            model.Operation = Console.ReadLine();
+
+            while (model.AktuellerStatus == Status.UngueltigeOperation)
+            {
+                Console.WriteLine("Die letzte Eingabe für die Operation war leider ungültig.");
+                Console.Write("Bitte gib eine Operation ein (+,-,*,/), # für Abbruch : ");
+                model.Operation = Console.ReadLine();
+            }
+
         }
 
 
-
-
-        private void PruefeEingabeAufGueltigkeit(string eingabe, int abgefragteZahl)
+        private void PruefeEingegebenenZahlenwert(string eingabe, int abgefragteZahl)
         {
             double zahl;
 
@@ -57,22 +74,22 @@ namespace Taschenrechner
                 }
                 else if (eingabe.ToUpper() == "FERTIG")
                 {
-                    BenutzerWillBeenden = true;
-
+                    model.AktuellerStatus = Status.BeendigungDurchBenutzer;
                 }
-                else if (!model.ZahlGueltig)
+
+                if (model.AktuellerStatus == Status.GrenzwertUeberschreitung)
                 {
                     eingabe = WiederholeEingabe();
-
                 }
 
             }
-            while (eingabe.ToUpper() != "FERTIG" && !model.ZahlGueltig);
+            while (eingabe.ToUpper() != "FERTIG" && !(model.AktuellerStatus == Status.OK));
 
         }
 
         public string WiederholeEingabe()
         {
+            Console.WriteLine("Die letzte Eingabe war leider ungültig!!");
             Console.WriteLine("Du musst eine gültige Gleitkommazahl zwischen -10,0 und 100,0 eingeben!");
             Console.WriteLine("Neben den Ziffern 0-9 sind lediglich die folgenden Sonderzeichen erlaubt: ,.-");
             Console.WriteLine("Dabei muss das - als erstes Zeichen vor einer Ziffer gesetzt werden.");
@@ -80,13 +97,7 @@ namespace Taschenrechner
             Console.WriteLine("Das , ist das Trennzeichen für die Nachkommastellen.");
             Console.WriteLine("Alle drei Sonderzeichen sind optional!");
             Console.WriteLine();
-            Console.Write("Bitte gib erneut eine Zahl für die Berechnung ein: ");
-            return Console.ReadLine();
-        }
-
-        private string HoleOperatorVomBenutzer()
-        {
-            Console.Write("Bitte gib eine Operation ein (+,-,*,/): ");
+            Console.Write("Bitte gib erneut eine Zahl für die Berechnung ein (FERTIG zum Beenden): ");
             return Console.ReadLine();
         }
 
@@ -115,7 +126,6 @@ namespace Taschenrechner
                     Console.WriteLine("Die Operation ist noch nicht implementiert oder ungültig");
                     break;
             }
-
 
         }
 

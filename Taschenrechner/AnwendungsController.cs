@@ -14,17 +14,16 @@
 
         public void Ausfuehren()
         {
-            view.HoleEingabenFuerErsteBerechnungVomBenutzer();
-            model.Berechne();
-            view.GibResultatAus();
-            view.HoleEingabenFuerFortlaufendeBerechnung();
+            view.HoleEingabenFuerBerechnungVomBenutzer(true);
+            //model.Berechne();
+            //view.GibResultatAus();
+            //view.HoleEingabenFuerBerechnungVomBenutzer();
 
-            while (!view.BenutzerWillBeenden)
+            while (!(model.AktuellerStatus == Status.BeendigungDurchBenutzer))
             {
-
                 model.Berechne();
                 view.GibResultatAus();
-                view.HoleEingabenFuerFortlaufendeBerechnung();
+                view.HoleEingabenFuerBerechnungVomBenutzer();
             }
 
         }
